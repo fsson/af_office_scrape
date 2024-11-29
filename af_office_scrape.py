@@ -107,6 +107,16 @@ def push_to_github():
         print(f"An error occurred while pushing to GitHub: {e}")
 
 if __name__ == "__main__":
+    try:
+        repo_path = os.path.dirname(__file__)
+        os.chdir(repo_path)
+        subprocess.run(["git", "pull"], check=True)
+        print("Repository updated with the latest changes.")
+    except subprocess.CalledProcessError as e:
+        print(f"An error occurred while pulling from GitHub: {e}")
+        exit(1)
+
+if __name__ == "__main__":
     if save_combined_data():
         combine_all_csvs()
         push_to_github()
