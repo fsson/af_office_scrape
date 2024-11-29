@@ -96,6 +96,8 @@ def push_to_github():
         repo_path = os.path.dirname(__file__)
         os.chdir(repo_path)
 
+        subprocess.run(["git", "pull"], check=True)
+
         subprocess.run(["git", "add", "."], check=True)
 
         commit_message = f"Automated update on {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
